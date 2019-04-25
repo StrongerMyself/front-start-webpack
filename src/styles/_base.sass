@@ -1,0 +1,75 @@
+@charset "UTF-8"
+
+div
+	display: flex
+	align-items: center
+	justify-content: center
+
+*, *:after, *:before
+	box-sizing: border-box
+	-webkit-tap-highlight-color: transparent
+	@extend %scrollbar
+
+HTML, BODY
+	height: 100%
+	min-width: $minW
+	
+BODY
+	font-family:  $baseFont
+	background-color: $bodyColor
+	color: $bodyFont
+	line-height: normal
+	margin: 0
+	padding: 0
+
+H1, H2, H3, H4, H5, H6, P, A, OL, UL, LI,
+INPUT, TEXTAREA, SELECT, BUTTON
+	font-family: inherit
+	font-weight: inherit
+	font-style: inherit
+	font-size: 100%
+	line-height: normal
+	vertical-align: baseline
+	text-decoration: none
+	color: inherit
+	margin: 0
+	padding: 0
+
+INPUT, TEXTAREA, SELECT, BUTTON
+	-webkit-appearance: none
+	outline: none
+	border: none
+	border-radius: 0
+	background-color: transparent
+	&:focus
+		outline: none
+
+UL, OL
+	list-style: none
+
+BUTTON
+	cursor: pointer
+
+%no-scrollbar
+	&::-webkit-scrollbar-track
+		background: transparent
+		visibility: hidden
+	&::-webkit-scrollbar
+		width: 0 
+		height: 0
+		visibility: hidden
+	&::-webkit-scrollbar-thumb
+		background: transparent
+		visibility: hidden
+		cursor: default
+	
+%scrollbar
+	&::-webkit-scrollbar-track
+		background: $scroll_track
+	&::-webkit-scrollbar
+		width: 7px
+		height: 7px
+	&::-webkit-scrollbar-thumb
+		background: $scroll_thumb
+		border-radius: 10em
+		cursor: pointer

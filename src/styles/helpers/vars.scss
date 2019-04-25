@@ -1,0 +1,57 @@
+// ----------------------------------------------------------------------
+// Font variables
+// ----------------------------------------------------------------------
+
+$baseFont: '-apple-system,BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+$titleFont:  Arial, sans-serif;
+
+// ----------------------------------------------------------------------
+// Layout sizes
+// ----------------------------------------------------------------------
+// (x, ex) - Extra, (l, lg) - Large, (m, md) - Middle, (s, sm) - Small"
+// ----------------------------------------------------------------------
+// xxl from 2560 to ~    (4k)
+// xl  from 1440 to 2560 (large desctop)
+// lg  from 1024 to 1440 (landscape tablet, small desctop)
+// md  from 768 to 1024  (landscape mobile, portain tablet)
+// sm  from 425 to 768   (large mobile)
+// xs  from 320 to 425   (small mobile)
+// xxs from ~ to 320     (smartwatch)
+// ----------------------------------------------------------------------
+
+$padd: 20px;
+$content: 1024px;
+$maxW: $content + ($padd * 2);
+
+$padd-xs: 15px;
+$content-xs: 425px;
+$maxW-xs: $content-xs + ($padd-xs * 2);
+
+$minW: 320px;
+
+$header_h: 50px;
+
+// ----------------------------------------------------------------------
+// Colors
+// ----------------------------------------------------------------------
+
+$accent: #fa876b;
+$hoverColor: #fff2da;
+
+$white: #fff; 
+$black: #000; 
+
+$fontLight: $white;
+$fontDark: $black; 
+
+$bodyFont: $fontDark;
+$bodyColor: #f0f0f0;
+
+$scroll_track: rgba($black, 0.2);
+$scroll_thumb: rgba($black, 0.6);
+
+$gray: #aaa;
+$graylight: #eee;
+$whitegray: fafafa
+
+// ADOBE COLOR #F5F9FD
