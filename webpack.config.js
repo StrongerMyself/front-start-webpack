@@ -6,6 +6,7 @@ const autoprefixer = require('autoprefixer')
 const TerserJSPlugin = require('terser-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const onHtmlPlugins = (dir) => {
     const files = fs.readdirSync(path.resolve(__dirname, dir))
@@ -22,10 +23,16 @@ const getConfig = (styleLoader, plugins, optimization) => ({
     entry: [
         './src/scripts/index.js',
         './src/styles/styles.sass',
-    ], 
+    ],
+    resolve: {
+        alias: {
+            src: path.resolve(__dirname, 'src/')
+        },
+        extensions: ['.js', '.json', 'sass', 'scss', 'pug'],
+    },
     devServer: {
         port: 3000,
-        open: true
+        open: true,
     },
     module: {
         rules: [
@@ -53,6 +60,26 @@ const getConfig = (styleLoader, plugins, optimization) => ({
                     { loader: 'sass-loader', options: { sourceMap: true } },
                 ],
             },
+            {
+				test: /\.(jpe?g|png|gif|svg)$/i,
+				use: [{
+					loader: 'file-loader',
+					options: {
+                        name: '[name].[ext]',
+                        outputPath: './images'
+					}
+				}]
+			},
+            {
+				test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+				use: [{
+					loader: 'file-loader',
+					options: {
+                        name: '[name].[ext]',
+                        outputPath: './fonts'
+					}
+				}]
+			},
         ]
     },
     plugins,
@@ -60,11 +87,13 @@ const getConfig = (styleLoader, plugins, optimization) => ({
 })
 
 module.exports = (env, argv) => {
-    const HtmlPlugins = onHtmlPlugins('./src/templates/screens')
-
     let styleLoader = 'style-loader'
     let plugins = [
-         ...HtmlPlugins,
+        ...onHtmlPlugins('./src/templates/screens'),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, 'src/assets'),
+            to: path.resolve(__dirname, 'dist'),
+        }]),
     ]
     let optimization = {}
 
@@ -74,7 +103,7 @@ module.exports = (env, argv) => {
         plugins = [
             ...plugins,
             new CleanWebpackPlugin(),
-            new MiniCssExtractPlugin()
+            new MiniCssExtractPlugin(),
         ]
         optimization = {
             minimizer: [new TerserJSPlugin({}), new OptimizeCSSAssetsPlugin({})],
